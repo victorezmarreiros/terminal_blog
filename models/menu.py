@@ -14,7 +14,7 @@ class Menu:
     def _user_has_account(self):                                            # Verify if user have already got an account
         blog = Database.find_one('blogs', {'author': self.user})            # Find blog with author=self.author <- usr
         if blog is not None:
-            self.user_blog = Blog.from_mongo(blog['id'])                    # self.blog = objeto Blog passando o id do blog que foi encontrado para esse usr
+            self.user_blog = Blog.from_mongo(blog['_id'])                    # self.blog = objeto Blog passando o id do blog que foi encontrado para esse usr
             return True
         else:
             return False                                                    # Não existe Blog para esse nome de usr
@@ -51,7 +51,7 @@ class Menu:
         blogs = Database.find(collection="blogs",
                               query={})
         for blog in blogs:
-            print(f"ID: {blog['id']}, Title: {blog['title']}, Author: {blog['author']}")
+            print(f"ID: {blog['_id']}, Title: {blog['title']}, Author: {blog['author']}")
 
     def _view_blog(self):
         blog_to_see = input("Enter the ID of the blog you'd like to read: ")
